@@ -237,6 +237,38 @@ public class MyLinkedList{
     }
   }
 
+  public boolean add(E value){
+    E newVal; //element to be added
+    if (length == 0){
+      newVal = new Node(value, null, null);
+      //If at the start of the list, there is no prev nor next for the new node yet
+      start = newVal;
+      end = newVal;
+      //Both start and end refer to the same node
+    }
+    else{
+      newVal = new Node(value, null, end);
+      //If not, there is still no next, but there is a prev for the new node
+      end.setNext(newVal);//End node must change its next to refer to newVal
+      end = newVal; //Sets end reference to the last node
+    }
+    length++; //new element
+    return true;
+  }
+    //add an element to the end of the list (the boolean would be true all the time if you want to conform to list standards)
+  public void extend(MyLinkedList<E> other){
+
+  }
+     //in O(1) time, connect the other list to the end of this list.
+    //The other list is then reset to size 0 (do not wipe out the nodes, just disconnect them.)
+    //This is how you will merge lists together for your radix sort.
+  public E removeFront(){
+
+  }
+    //remove the 1st element of the list, and return that value.
+//OPTIONALLY:
+    //A working iterator would be faster than remove front for traversing the list.
+
 //------------------------------------------------------------------------------------------------------------------------------------//
 
   private class Node{
@@ -246,6 +278,12 @@ public class MyLinkedList{
    //Constructor for Node
    public Node(int val, Node Next, Node Prev){
      data = val;
+     next = Next;
+     prev = Prev;
+   }
+
+   public Node(E val, Node Next, Node Prev){
+     E data = val;
      next = Next;
      prev = Prev;
    }
