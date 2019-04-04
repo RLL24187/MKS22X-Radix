@@ -71,18 +71,13 @@ public class MyLinkedList<E>{
    //The other list is then reset to size 0 (do not wipe out the nodes, just disconnect them.)
    //This is how you will merge lists together for your radix sort.
   public E removeFront(){
-    //Throws IndexOutOfBoundsException
-    //if the index is out of range (index < 0 || index >= size())
-    if (index < 0 || index >= this.size()){
-      throw new IndexOutOfBoundsException("void add(int index, Integer value) error handled!");
-    }
-    E val=start;
+    Node<E> val=start;
     //index == 0 //if at beginning, next node's before is null
-    Node newStart = getNthNode(1);
+    Node newStart = start.next;
     newStart.setPrev(null);
     start = newStart;
     length--; //1 less element
-    return val;
+    return val.data;
   }
     //remove the 1st element of the list, and return that value.
 //OPTIONALLY:
