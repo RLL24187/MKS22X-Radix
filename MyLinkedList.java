@@ -115,12 +115,17 @@ public class MyLinkedList<E> implements Iterable<E>{
     //The size of other is reduced to 0
     //The size of this is now the combined sizes of both original list
     if (other.length > 0){ // if the other size was 0, nothing would change)
-      //start stays the same
-      end.setNext(other.start); //set next of original end node to start of other
-      end = other.end; //move current end to end of other
-      length+= other.length; //total size increase by other length
+      if (length > 0){
+        end.setNext(other.start); //set next of original end node to start of other
+      }
+      else{
+        start = other.start;
+      }
+      end = other.end;
+      length += other.length;
       other.clear();
     }
+    cur = start;
   }
 
 //------------------------------------------------------------------------------------------------------------------------------------//
