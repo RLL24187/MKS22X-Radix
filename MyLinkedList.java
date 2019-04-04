@@ -20,6 +20,23 @@ public class MyLinkedList<E> implements Iterable<E>{
   public Iterator<E> iterator(){
     return new MLLIterator(start);
   }
+
+  private class MLLIterator implements Iterator<E>{
+    Node cur;
+
+    public MLLIterator(Node start){
+      cur = start;
+    }
+    public E next(){
+      Node<E> temp = cur;
+      cur = cur.next();
+      return temp.getData();
+    }
+
+    public boolean hasNext(){
+      return cur != null;
+    }
+  }
   /** Returns length of the list
     @return the current size of the list (number of nodes)
     */
