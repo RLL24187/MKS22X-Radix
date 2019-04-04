@@ -1,20 +1,25 @@
-public class MyLinkedList<E>{
+public class MyLinkedList<E> implements Iterable<E>{
   private int length;
-  private Node<E> start,end;
+  private Node<E> start, end, cur;
 
   //Constructor for MyLinkedlist
   public MyLinkedList(){
     length = 0;
     start = null;
     end = null;
+    cur = null;
   }
 
   public void clear(){
     length = 0;
     start = null;
     end = null;
+    cur = null;
   }
 
+  public Iterator<E> iterator(){
+    return new MLLIterator(start);
+  }
   /** Returns length of the list
     @return the current size of the list (number of nodes)
     */
