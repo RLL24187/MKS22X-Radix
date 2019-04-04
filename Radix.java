@@ -45,5 +45,15 @@ public class Radix{
       }
       max--; //reduce number of times you still have to sort by buckets
     }
+    //final adjustments
+    m.clear();
+    for (MyLinkedList<Integer> bucket : buckets){
+      m.extend(bucket);
+    }
+    for (int i : m){
+      //note: max must already be 0, this will use less memory
+      data[max] = i;
+      max++;
+    }
   }
 }
