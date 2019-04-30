@@ -24,7 +24,12 @@ public class Radix{
         buckets[i%10 + 10].add(i); //second half of the buckets
       }
       else{
-        buckets[i%10 + 9].add(i); //first half of the buckets
+        if (i % 10 == 0){
+          buckets[0].add(i); //0th element for negative numbers with last digit 0
+        }
+        else{
+          buckets[(i%10 + 9)].add(i); //first half of the buckets
+        }
       }
     }
     MyLinkedList<Integer> m = new MyLinkedList<Integer>(); //MLL to stores values into
@@ -42,7 +47,8 @@ public class Radix{
         if (i >= 0){
           buckets[i%modder/(modder/10) + 10].add(i);
         }
-        else buckets[i%modder/(modder/10)].add(i);
+        else buckets[i%modder/(modder/10) + 9].add(i);
+        //System.out.println(m.toString());
       }
       max--; //reduce number of times you still have to sort by buckets
     }
@@ -57,11 +63,30 @@ public class Radix{
       max++;
     }
   }
+  public static String printArray(int[]ary){
+    String output = "{";
+    for (int i = 0; i < ary.length; i++){
+      output += ary[i];
+      if (i != ary.length - 1){
+        output += ", ";
+      }
+    }
+    return output + "}";
+  }
 
     //Mr K's Driver!!!!
     public static void main(String[] args){
       System.out.println("Size\t\tMax Value\tquick/builtin ratio ");
       int[]MAX_LIST = {1000000000,500,10};
+      int[] sorted = {-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+      System.out.println(printArray(sorted));
+      radixsort(sorted);
+      System.out.println(printArray(sorted));
+      int[] rsorted = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10};
+      System.out.println(printArray(rsorted));
+      radixsort(rsorted);
+      System.out.println(printArray(rsorted));
+      /*
       for(int MAX : MAX_LIST){
         for(int size = 31250; size < 2000001; size*=2){
           long qtime=0;
@@ -91,6 +116,24 @@ public class Radix{
           System.out.println(size +"\t\t"+MAX+"\t"+1.0*qtime/btime);
         }
         System.out.println();
+      }*/
+
+      int[] nums = {-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+      System.out.println();
+      for (int i = 0; i < nums.length; i++){
+        if (nums[i] >= 0){
+          System.out.print(nums[i]+": ");
+          System.out.println(nums[i] % 10 + 10);
+        }
+        else{
+          System.out.print(nums[i]+": ");
+          if (nums[i]%10==0){
+            System.out.println(0);
+          }
+          else{
+            System.out.println(Math.abs((nums[i] % 10 )+ 10));//first half of the buckets
+          }
+        }
       }
     }
 }
