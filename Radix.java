@@ -24,12 +24,7 @@ public class Radix{
         buckets[i%10 + 10].add(i); //second half of the buckets
       }
       else{
-        if (i % 10 == 0){
-          buckets[0].add(i); //0th element for negative numbers with last digit 0
-        }
-        else{
-          buckets[(i%10 + 9)].add(i); //first half of the buckets
-        }
+        buckets[(i%10 + 9)].add(i); //first half of the buckets
       }
     }
     MyLinkedList<Integer> m = new MyLinkedList<Integer>(); //MLL to stores values into
@@ -39,6 +34,7 @@ public class Radix{
       //fill the buckets in the MLL
       m.clear(); //make sure the list is clear first
       for (MyLinkedList<Integer> bucket : buckets){
+        //System.out.println(bucket.toString());
         //K said to connect all the linked lists together
         m.extend(bucket);
       }
@@ -47,7 +43,9 @@ public class Radix{
         if (i >= 0){
           buckets[i%modder/(modder/10) + 10].add(i);
         }
-        else buckets[i%modder/(modder/10) + 9].add(i);
+        else{
+          buckets[i%modder/(modder/10) + 9].add(i);
+        }
         //System.out.println(m.toString());
       }
       max--; //reduce number of times you still have to sort by buckets
@@ -73,20 +71,72 @@ public class Radix{
     }
     return output + "}";
   }
-
+/*
+  public static String printMLL(MyLinkedList l){
+    String output = "{";
+    for (int i = 0; i < ary.length; i++){
+      output += l.getData[i];
+      if (i != ary.length - 1){
+        output += ", ";
+      }
+    }
+    return output + "}";
+  }*/
     //Mr K's Driver!!!!
     public static void main(String[] args){
       System.out.println("Size\t\tMax Value\tquick/builtin ratio ");
       int[]MAX_LIST = {1000000000,500,10};
-      int[] sorted = {-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-      System.out.println(printArray(sorted));
-      radixsort(sorted);
-      System.out.println(printArray(sorted));
-      int[] rsorted = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10};
-      System.out.println(printArray(rsorted));
-      radixsort(rsorted);
-      System.out.println(printArray(rsorted));
       /*
+      int[] sorted = {-25, -20, -19, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+      System.out.println("\nSorted: "+printArray(sorted));
+      radixsort(sorted);
+      System.out.println("\nSorted (sorted): "+printArray(sorted));
+      int[] rsorted = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10};
+      System.out.println("\nrsorted: "+printArray(rsorted));
+      radixsort(rsorted);
+      System.out.println("\nrsorted (sorted): "+printArray(rsorted));
+      */
+      /*
+      int[] bigsorted = new int[1001];
+      int[] bigrsorted = new int[1001];
+      int counter = 0;
+      for (int i = -500; i < 501; i ++){
+        bigsorted[counter]=i;
+        bigrsorted[1000-counter]=i;
+        counter++;
+      }
+      System.out.println("bigsorted:\n"+printArray(bigsorted));
+      radixsort(bigsorted);
+      System.out.println("bigsorted (sorted):\n"+printArray(bigsorted));
+      System.out.println("bigrsorted:\n"+printArray(bigrsorted));
+      radixsort(bigrsorted);
+      System.out.println("bigrsorted (sorted):\n"+printArray(bigrsorted));
+      */
+      /*
+      int seed, size;
+      if (args.length > 0){
+        seed = Integer.parseInt(args[0]);
+      }
+      else{
+        Random r = new Random();
+        seed = r.nextInt(10000);
+      }
+      Random rnd = new Random(seed);
+      if (args.length > 1){
+        size = Integer.parseInt(args[1]);
+      }
+      else{
+        size = rnd.nextInt(30);
+      }
+      int[] randomNums = new int[size];
+      for (int i = 0; i < size; i++){
+        randomNums[i]=rnd.nextInt(100)-50;
+      }
+      System.out.println("Seed: "+seed+"\nSize: "+size);
+      System.out.println(printArray(randomNums));
+      radixsort(randomNums);
+      System.out.println(printArray(randomNums));
+      */
       for(int MAX : MAX_LIST){
         for(int size = 31250; size < 2000001; size*=2){
           long qtime=0;
@@ -116,8 +166,8 @@ public class Radix{
           System.out.println(size +"\t\t"+MAX+"\t"+1.0*qtime/btime);
         }
         System.out.println();
-      }*/
-
+      }
+/*
       int[] nums = {-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
       System.out.println();
       for (int i = 0; i < nums.length; i++){
@@ -135,5 +185,6 @@ public class Radix{
           }
         }
       }
+      */
     }
 }
