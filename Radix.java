@@ -83,9 +83,10 @@ public class Radix{
     return output + "}";
   }*/
     //Mr K's Driver!!!!
+    /*
     public static void main(String[] args){
       System.out.println("Size\t\tMax Value\tquick/builtin ratio ");
-      int[]MAX_LIST = {1000000000,500,10};
+      int[]MAX_LIST = {1000000000,500,10};*/
       /*
       int[] sorted = {-25, -20, -19, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
       System.out.println("\nSorted: "+printArray(sorted));
@@ -137,6 +138,7 @@ public class Radix{
       radixsort(randomNums);
       System.out.println(printArray(randomNums));
       */
+      /*
       for(int MAX : MAX_LIST){
         for(int size = 31250; size < 2000001; size*=2){
           long qtime=0;
@@ -167,6 +169,7 @@ public class Radix{
         }
         System.out.println();
       }
+      */
 /*
       int[] nums = {-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
       System.out.println();
